@@ -7,15 +7,15 @@ filename = 'listen-to-the-ancient-egyptions-tv.wav';
 
 %reading the coeffiencents from the txt file
 
-fileID = fopen('filters.txt', 'r');
+file = fopen('filters.txt', 'r');
 lines = cell(0, 1);
 
-while ~feof(fileID)
-    line = fgetl(fileID);
+while ~feof(file)
+    line = fgetl(file);
     lines = [lines; {line}];
 end
 lines = lines';
-fclose(fileID);
+fclose(file);
 
 flipped_lines = flip(lines);
 
@@ -25,18 +25,20 @@ coeff= str2double(coeff);
 %initalize filter bank 
 fb = zeros(32,512);
 
-for i= 1:32
-    for j= 1:512
-        fb(i,j)= coeff(j) * cos((i+0.5)*(j-16)*pi/32);
+for i= 0:1:31
+    for j= 0:1:511
+        fb(i+1,j+1)= coeff(j+1) * cos((i+0.5)*(j-16)*pi/32);
     end
 end
 
 %downsample 
 filter_bank = zeros(32, size(y, 1) / 32);
 
-for i = 1:32
+filtered_signal = [];
+for i = 0:1:31
     % Filter the signal using the current filter
-    filtered_signal = filter(coeff, 1, y);
-    downsampled_signal = downsample(filtered_signal, 32);
-    filter_bank(i, :) = downsampled_signal;
+    filtered_seg = filter(fb(i+1,:), 1, y);
+    downsampled_signal = downsample(filtered_seg, 32);
+    filtered_signal = [filtered_signal downsampled_signal];
 end
+
