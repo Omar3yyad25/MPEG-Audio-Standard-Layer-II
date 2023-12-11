@@ -2,8 +2,12 @@
 filename = 'listen-to-the-ancient-egyptions-tv.wav';
 [y,Fs] = audioread(filename);  
 
-%figure;
-%plot(y);
+t= 0:1/Fs:240000/Fs - 1/Fs;
+figure;
+plot(t, y);
+title("Input Audio");
+xlabel("time");
+ylabel("Amp");
 
 %reading the coeffiencents from the txt file
 
@@ -42,6 +46,10 @@ for i = 0:1:31
     filtered_signal = [filtered_signal downsampled_signal];
 end
 
+plot(abs(fftshift(fft(filtered_signal(:,1)))));
+title("Spectral view after filterbank")
+xlabel("Freq (Hz)")
+ylabel("Amp");
 
 save('filtered_signal.mat', 'filtered_signal');
 save('coeff.mat', "coeff")

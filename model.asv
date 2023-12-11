@@ -14,10 +14,10 @@ for n = 1:N/2
     SPL = [SPL SPL_subband];
 end
 
-% plot (F, SPL);
-% title("Spectral view of input signal");
-% xlabel("Frequency (Hz)")
-% ylabel("SPL (dB)");
+plot (F, SPL);
+title("Spectral view of input signal");
+xlabel("Frequency (Hz)")
+ylabel("SPL (dB)");
 
 
 % % quit A
@@ -65,9 +65,6 @@ end
 
 reshaped_SPL = reshape(reshaped_SPL.', 1,[]);
 
-plot(F, reshaped_SPL);
-title("Spectral after psychoacoustic model")
-xlabel("Freq (Hz)");
-ylabel("SPL (dB)")
+plot()
 
 save('reshaped_SPL.mat', 'reshaped_SPL');

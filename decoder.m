@@ -35,7 +35,17 @@ reconstructed = sum(restored_signal, 2);
 reconstructed = reconstructed';
 
 plot([1:240000],reconstructed, [1:240000], y);
-
+title("Comparession between the original and reconstructed signals")
 audiowrite("reconstructed.wav",reconstructed,Fs);
 
 
+plot(abs(fftshift(fft(reconstructed))));
+
+inputSignalSize = numel(y)*16;
+encodedSignalSize = 0;
+
+for i =1:32
+    encodedSignalSize = encodedSignalSize + numel(quatized(:,i)*subband_bits(i));
+end
+
+compression_ratio = inputSignalSize / encodedSignalSize;
