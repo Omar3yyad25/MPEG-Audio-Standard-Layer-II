@@ -100,19 +100,21 @@ end
 
 % send to quantizer number of bits and 12 sample from each 32 column then take the next 12 sample
 
-
-quan_result = [];
-bit_index = 1;
+quatized = zeros(7500,32);
+maxi=zeros(625,32);
+mini=zeros(625,32);
 for j = 1 : 12 : 7500
     for i = 1 : 32
-        [maxi, mini, sampled_quan]=Quan(filtered_signal(j:j+11,i), subband_bits(:,bit_index));
-        quan_result = [quan_result; maxi, mini, sampled_quan];
-        bit_index = bit_index +1;
+        [maxi((j-1)/12+1,i), mini((j-1)/12+1,i), quatized(j:j+11,i)]=Quan(filtered_signal(j:j+11,i), subband_bits(i));
     end
-    bit_index = 1;
 end
 
-save('quan_result.mat', 'quan_result');
+save('maxi.mat', 'maxi');
+save('mini.mat', 'mini');
+save('quatized.mat', 'quatized')
+save('subband_bits.mat', "subband_bits")
+
+
 
 
 

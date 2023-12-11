@@ -4,9 +4,6 @@ load("quatized.mat")
 load("subband_bits.mat")
 load("coeff.mat")
 
-filename = 'listen-to-the-ancient-egyptions-tv.wav';
-[y,Fs] = audioread(filename); 
-
 restored_signal = zeros(240000, 32);
 upsampled_subband = zeros(240000, 1);
 fb = zeros (32,513);
@@ -34,8 +31,6 @@ end
 reconstructed = sum(restored_signal, 2);
 reconstructed = reconstructed';
 
-plot([1:240000],reconstructed, [1:240000], y);
-
-audiowrite("reconstructed.wav",reconstructed,Fs);
+plot(reconstructed);
 
 
