@@ -106,14 +106,14 @@ maxi_result = [];
 mini_result = [];
 sampled_quan_result = [];
 bit_index = 1;
-for j = 1 : 12 : 7500
-    for i = 1 : 32
-        [maxi, mini, sampled_quan]=Quan(filtered_signal(j:j+11,i), subband_bits(:,bit_index));
-        maxi_result= [maxi_result, maxi];
-        mini_result = [mini_result, mini];
-        sampled_quan_result = [sampled_quan_result, mini_result];
-        bit_index = bit_index +1;
-    end
-    bit_index = 1;
-end
+% for j = 1 : 12 : 7500
+%     for i = 1 : 32
+%         [maxi, mini, sampled_quan]=Quan(filtered_signal(j:j+11,i), subband_bits(:,bit_index));
+%         maxi_result= [maxi_result, maxi];
+%         mini_result = [mini_result, mini];
+%         sampled_quan_result = [sampled_quan_result, mini_result];
+%         bit_index = bit_index +1;
+%     end
+%     bit_index = 1;
+% end
 
