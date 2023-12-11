@@ -42,3 +42,4 @@ for i = 0:1:31
     filtered_signal = [filtered_signal downsampled_signal];
 end
 
+save('filtered_signal.mat', 'filtered_signal');
